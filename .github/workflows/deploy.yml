@@ -29,8 +29,9 @@ jobs:
         env:
           # Project pages live at https://<user>.github.io/<repo>/
           BASE_PATH: /${{ github.event.repository.name }}/
-      # Pages has no SPA rewrites: serve the app for unknown paths so deep links work.
-      - run: cp dist/index.html dist/404.html
+      # Pages has no SPA rewrites: give every known route its own index.html (HTTP 200),
+      # and serve the app as 404.html for anything else.
+      - run: node scripts/spa-routes.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
