@@ -1,5 +1,7 @@
 # Room Theory
 
+**Live:** https://aamirkazi71-hue.github.io/room-theory/ · Arabic: https://aamirkazi71-hue.github.io/room-theory/?lang=ar
+
 An interior design studio site and real-time 3D room configurator.
 React 18 · Vite · TypeScript · Tailwind · Three.js / React Three Fiber / Drei · GSAP + ScrollTrigger · Zustand.
 
@@ -43,3 +45,13 @@ npm run build      # typecheck + production build
 Saved projects go through `ProjectRepository` in `src/store/projects.ts`. Implement it against a `projects` table
 (`id uuid, user_id uuid, name text, design jsonb, thumbnail text, created_at, updated_at`) and call
 `setProjectRepository(...)` after sign-in; the UI needs no changes. The newsletter form stores locally until a provider is connected (`Footer.tsx`).
+
+## Deployment
+
+Every push to `main` builds and publishes the site to GitHub Pages (`.github/workflows/deploy.yml`).
+The build runs with `BASE_PATH=/room-theory/`; `scripts/spa-routes.mjs` then writes an `index.html` for every known route so deep links return HTTP 200.
+If you add a page or route, add it to that script. If you rename the repository, the base path follows automatically, but update the two `hreflang` links in `index.html`.
+
+## Languages
+
+English and Arabic (right-to-left). Translations live in `src/i18n/`, keyed by the English text; counted strings use Arabic plural forms in `ar-plurals.ts`.
